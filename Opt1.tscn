@@ -17,7 +17,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0.156863 ), Color( 0, 0, 0, 0 ) ]
+"values": [ Color( 0, 0, 0, 0.392157 ), Color( 0, 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("vida2:position")
@@ -45,7 +45,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.156863 ) ]
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.392157 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("vida2:position")
@@ -72,7 +72,7 @@ text = "This is opt 1"
 script = ExtResource( 2 )
 
 [node name="vida2" type="Sprite" parent="."]
-modulate = Color( 0, 0, 0, 0.156863 )
+modulate = Color( 0, 0, 0, 0.392157 )
 show_behind_parent = true
 position = Vector2( -40.4639, -6.08948 )
 scale = Vector2( 18.161, 2.0756 )

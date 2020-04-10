@@ -1,12 +1,13 @@
 extends CanvasLayer
 
 onready var text = get_node('language/english').text 
-var part
+var part = 'part1'
 
 func _ready():
-	get_node("Dialog/Timer").wait_time = text.part1.scrool_speed
-	get_node("Dialog/Label").set_text(text.part1.dialog)
-	gen_opts('part1')
+	get_node("Sprite").texture = load('res://Characters/' + text[part].character + '/' + text[part].emotion + '.png')
+	get_node("Dialog/Timer").wait_time = text[part].scrool_speed
+	get_node("Dialog/Label").set_text(text[part].dialog)
+	gen_opts(part)
 
 func _process(delta):
 	if get_node("Dialog/Label").visible_characters >= text[part].dialog.length():
@@ -40,7 +41,7 @@ func chooser():
 			select = get_node('Options').get_child_count()-1
 			
 	for i in range(0, get_node('Options').get_child_count()):
-		if i == select:
+		if not i == select:
 			get_node('Options').get_child(i).get_node('AnimationPlayer').set_current_animation('Close')
 		elif i == previous:
 			get_node('Options').get_child(i).get_node('AnimationPlayer').set_current_animation('Open')
@@ -48,6 +49,14 @@ func chooser():
 
 func gen_opts(next):
 	part = next
+	get_node("Sprite").texture = load('res://Characters/' + text[part].character + '/' + text[part].emotion + '.png')
+	if text[part].flip:
+		get_node("Sprite").set_scale(Vector2(1,1))
+		get_node("Sprite").set_position(Vector2(200,350))
+		print('flip')
+	else:
+		get_node("Sprite").set_scale(Vector2(-1,1))
+		get_node("Sprite").set_position(Vector2(840,350))
 	for i in range(0, get_node("Options").get_child_count()):
 		get_node("Options").get_child(i).queue_free()
 	for i in range(0, text[part].options.size()):

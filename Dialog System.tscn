@@ -4,7 +4,7 @@
 [ext_resource path="res://Dialog System.tres" type="DynamicFont" id=2]
 [ext_resource path="res://vida.png" type="Texture" id=3]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=1]
 resource_name = "Close"
 length = 99.0
 tracks/0/type = "value"
@@ -32,7 +32,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "Open"
 length = 99.0
 tracks/0/type = "value"
@@ -60,8 +60,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "Appear"
+[sub_resource type="Animation" id=3]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -75,8 +74,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Dissapear"
+[sub_resource type="Animation" id=4]
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -90,15 +88,16 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="GDScript" id=6]
+[sub_resource type="GDScript" id=5]
 script/source = "extends Node
 
 var text = {
 	'part1':{
 		'dialog' : \"this is test dialog, part 1\",
 		'character' : \"Jonny\",
-		'emotion': \"normal\",
+		'emotion': \"Happy\",
 		'scrool_speed' : 0.1,
+		'flip' : false,
 		'options': [
 		{'text':'go back to part 2','command':{'type': 'next', 'args': 'part2',}},
 		{'text':'test12','command':{'type': 'null', 'args': 'null',}},
@@ -110,8 +109,9 @@ var text = {
 	'part2':{
 		'dialog' : \"this is test dialog, part 2, it also way longer than part 1 to test the reading speed, also how are you doing, i'm living a nightmare now\",
 		'character' : \"Jonny\",
-		'emotion': \"normal\",
+		'emotion': \"Angry\",
 		'scrool_speed' : 0.01,
+		'flip' : true,
 		'options': [
 		{'text':'test23','command':{'type': 'null', 'args': 'null',}},
 		{'text':'go back to part 1','command':{'type': 'next', 'args': 'part1',}}
@@ -123,8 +123,8 @@ var text = {
 script = ExtResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Close = SubResource( 4 )
-anims/Open = SubResource( 5 )
+anims/Close = SubResource( 1 )
+anims/Open = SubResource( 2 )
 
 [node name="Dialog" type="Control" parent="."]
 margin_left = 70.0
@@ -149,16 +149,16 @@ test"
 scroll_following = true
 
 [node name="vida" type="Sprite" parent="Dialog"]
-modulate = Color( 0, 0, 0, 0.156863 )
-show_behind_parent = true
+modulate = Color( 0, 0, 0, 0.392157 )
 position = Vector2( 0, -80 )
 scale = Vector2( 14, 2 )
+z_index = -5
 texture = ExtResource( 3 )
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Dialog"]
-anims/Appear = SubResource( 2 )
-anims/Dissapear = SubResource( 3 )
+anims/Appear = SubResource( 3 )
+anims/Dissapear = SubResource( 4 )
 
 [node name="Timer" type="Timer" parent="Dialog"]
 wait_time = 0.02
@@ -173,6 +173,10 @@ margin_bottom = 40.0
 [node name="language" type="Node" parent="."]
 
 [node name="english" type="Node" parent="language"]
-script = SubResource( 6 )
+script = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 100, 200 )
+z_index = -10
 
 [connection signal="timeout" from="Dialog/Timer" to="." method="_on_Timer_timeout"]
