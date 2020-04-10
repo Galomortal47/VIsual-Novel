@@ -2,6 +2,7 @@ extends CanvasLayer
 
 onready var text = get_node('language/english').text 
 var part = 'part1'
+var opt_menu = false
 
 func _ready():
 	get_node("Sprite").texture = load('res://Characters/' + text[part].character + '/' + text[part].emotion + '.png')
@@ -12,12 +13,16 @@ func _ready():
 func _process(delta):
 	if get_node("Dialog/Label").visible_characters >= text[part].dialog.length():
 		get_node('AnimationPlayer').play('Open')
+		opt_menu = true
 		if Input.is_action_just_pressed('ui_accept'):
 			get_node('Options').get_child(select)._on_Button_button_down()
+			get_node('AudioStreamPlayer2').play()
 	else:
 		get_node('AnimationPlayer').play('Close')
+		opt_menu = false
 		if Input.is_action_just_pressed('ui_accept'):
 			get_node("Dialog/Label").visible_characters = text[part].dialog.length()
+			get_node('AudioStreamPlayer2').play()
 
 var select = 0
 var previous = 0
@@ -30,11 +35,15 @@ func chooser():
 	previous = select
 #	print(select)
 	if Input.is_action_just_pressed("ui_up"):
+		if opt_menu:
+			get_node('AudioStreamPlayer').play()
 		if not select >= get_node('Options').get_child_count()-1:
 			select += speed
 		else:
 			select = 0
 	if Input.is_action_just_pressed("ui_down"):
+		if opt_menu:
+			get_node('AudioStreamPlayer').play()
 		if not select <= 0:
 			select -= speed
 		else:
