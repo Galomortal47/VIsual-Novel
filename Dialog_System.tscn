@@ -10,24 +10,12 @@
 resource_name = "Close"
 length = 99.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Options:rect_position")
+tracks/0/path = NodePath("Options:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 68.6981, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Options:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -38,24 +26,12 @@ tracks/1/keys = {
 resource_name = "Open"
 length = 99.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("Options:rect_position")
+tracks/0/path = NodePath("Options:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 68.6981, 0 ), Vector2( 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Options:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -101,7 +77,7 @@ var text = {
 		'scrool_speed' : 0.1,
 		'flip' : false,
 		'options': [
-		{'text':' go back to part 2','command':{'type': 'next', 'args': 'part2',}},
+		{'text':'go back to part 2','command':{'type': 'next', 'args': 'part2',}},
 		{'text':'test12','command':{'type': 'null', 'args': 'null',}},
 		{'text':'test13','command':{'type': 'null', 'args': 'null',}},
 		{'text':'test14','command':{'type': 'null', 'args': 'null',}},
@@ -129,7 +105,6 @@ anims/Close = SubResource( 1 )
 anims/Open = SubResource( 2 )
 
 [node name="Dialog" type="Control" parent="."]
-editor/display_folded = true
 margin_left = 70.0
 margin_top = 510.0
 margin_right = 110.0
@@ -167,11 +142,9 @@ anims/Dissapear = SubResource( 4 )
 wait_time = 0.02
 autostart = true
 
-[node name="Options" type="Control" parent="."]
+[node name="Options" type="Node2D" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 68.6981
-margin_right = 108.698
-margin_bottom = 40.0
+position = Vector2( 512, 380 )
 
 [node name="language" type="Node" parent="."]
 
