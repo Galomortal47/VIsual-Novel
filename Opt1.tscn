@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Dialog System.tres" type="DynamicFont" id=1]
+[ext_resource path="res://optbutton.gd" type="Script" id=2]
+[ext_resource path="res://vida.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Close"
+length = 99.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("vida2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0.156863 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("vida2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -40.4639, -6.08948 ), Vector2( 920.801, -6.08948 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Open"
+length = 99.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("vida2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.156863 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("vida2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 920.801, -6.08948 ), Vector2( -40.4639, -6.08948 ) ]
+}
+
+[node name="Opt1" type="Label"]
+margin_left = 580.0
+margin_top = 380.0
+margin_right = 1615.0
+margin_bottom = 497.0
+rect_scale = Vector2( 0.333, 0.333 )
+focus_mode = 2
+custom_fonts/font = ExtResource( 1 )
+text = "This is opt 1"
+script = ExtResource( 2 )
+
+[node name="vida2" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 0.156863 )
+show_behind_parent = true
+position = Vector2( -40.4639, -6.08948 )
+scale = Vector2( 18.161, 2.0756 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Button" type="Button" parent="."]
+margin_left = -21.0
+margin_top = 1.0
+margin_right = 1115.0
+margin_bottom = 120.0
+flat = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Close = SubResource( 1 )
+anims/Open = SubResource( 2 )
+
+[connection signal="button_down" from="Button" to="." method="_on_Button_button_down"]
