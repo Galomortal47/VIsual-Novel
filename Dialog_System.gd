@@ -19,13 +19,16 @@ func _process(delta):
 	else:
 		get_node('AnimationPlayer').play('Close')
 		opt_menu = false
-		if Input.is_action_just_pressed('ui_accept') or Input.is_action_just_released('ui_mouse_right'):
-			get_node("Dialog/Label").visible_characters = text[part].dialog.length()
-			get_node('bt_sfx2').play()
+		if Input.is_action_just_pressed('ui_accept'):
+			btn_click()
 		if not get_node('Speaking').get_child(rand).is_playing():
 			randomize()
 			rand = int(rand_range(1,6))
 			get_node('Speaking').get_child(rand)._set_playing(true)
+
+func btn_click():
+	get_node("Dialog/Label").visible_characters = text[part].dialog.length()
+	get_node('bt_sfx2').play()
 
 var select = 0
 var previous = 0
@@ -99,3 +102,7 @@ func command_exec(args):
 			get_node('Speaking').get_child(i).pitch_scale = text[args.args].voce_pitch
 		get_node("Dialog/Label").set_text(text[args.args].dialog)
 		gen_opts(args.args)
+
+func _on_skip_button_down():
+	btn_click()
+	pass # Replace with function body.
