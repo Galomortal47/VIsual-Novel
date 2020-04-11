@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Dialog_System.gd" type="Script" id=1]
 [ext_resource path="res://Dialog_System.tres" type="DynamicFont" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Voice_pieces/4.ogg" type="AudioStream" id=9]
 [ext_resource path="res://Voice_pieces/5.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Voice_pieces/6.ogg" type="AudioStream" id=11]
+[ext_resource path="res://mouse/mouse.gd" type="Script" id=12]
+[ext_resource path="res://3d/3dcursosr.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Close"
@@ -44,7 +46,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="GDScript" id=5]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Node
 
 var text = {
@@ -79,6 +81,26 @@ var text = {
 	}
 }"
 
+[sub_resource type="Animation" id=4]
+resource_name = "default"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
+
+[sub_resource type="ViewportTexture" id=5]
+viewport_path = NodePath("Cursor/3D viewport")
+
 [node name="Dialog System" type="CanvasLayer"]
 script = ExtResource( 1 )
 
@@ -87,6 +109,7 @@ anims/Close = SubResource( 1 )
 anims/Open = SubResource( 2 )
 
 [node name="Dialog" type="Control" parent="."]
+editor/display_folded = true
 margin_left = 70.0
 margin_top = 510.0
 margin_right = 110.0
@@ -126,9 +149,10 @@ modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 512, 380 )
 
 [node name="language" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="english" type="Node" parent="language"]
-script = SubResource( 5 )
+script = SubResource( 3 )
 
 [node name="Character" type="Sprite" parent="."]
 position = Vector2( 100, 200 )
@@ -144,6 +168,7 @@ stream = ExtResource( 5 )
 volume_db = -12.0
 
 [node name="Speaking" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Voice1" type="AudioStreamPlayer" parent="Speaking"]
 stream = ExtResource( 6 )
@@ -172,6 +197,35 @@ volume_db = -12.0
 [node name="background" type="Sprite" parent="."]
 modulate = Color( 0.694118, 0.694118, 0.694118, 1 )
 z_index = -100
+centered = false
+
+[node name="Cursor" type="Node2D" parent="."]
+position = Vector2( 386.632, 273.094 )
+script = ExtResource( 12 )
+
+[node name="3D viewport" type="Viewport" parent="Cursor"]
+size = Vector2( 200, 200 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="Camera" type="Camera" parent="Cursor/3D viewport"]
+projection = 1
+current = true
+size = 6.0
+
+[node name="Spatial" type="Spatial" parent="Cursor/3D viewport/Camera"]
+transform = Transform( 0.766044, -0.642787, 0, 0.55667, 0.663414, 0.5, -0.321394, -0.383022, 0.866025, -0.73, 0.61, -5.74 )
+
+[node name="Scene Root" parent="Cursor/3D viewport/Camera/Spatial" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 1.74846e-007, 0, 1, 0, -1.74846e-007, 0, 1, 0, 0, 0 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Cursor/3D viewport/Camera/Spatial/Scene Root"]
+autoplay = "default"
+anims/default = SubResource( 4 )
+
+[node name="Cursor Spite" type="Sprite" parent="Cursor"]
+scale = Vector2( 0.15, 0.15 )
+texture = SubResource( 5 )
 centered = false
 
 [connection signal="timeout" from="Dialog/Timer" to="." method="_on_Timer_timeout"]
