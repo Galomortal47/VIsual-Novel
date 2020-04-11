@@ -1,10 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Dialog_System.gd" type="Script" id=1]
 [ext_resource path="res://Dialog_System.tres" type="DynamicFont" id=2]
 [ext_resource path="res://vida.png" type="Texture" id=3]
 [ext_resource path="res://16930_1461335337.ogg" type="AudioStream" id=4]
 [ext_resource path="res://16931_1461335337.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Voice_pieces/1.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Voice_pieces/2.ogg" type="AudioStream" id=7]
+[ext_resource path="res://Voice_pieces/3.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Voice_pieces/4.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Voice_pieces/5.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Voice_pieces/6.ogg" type="AudioStream" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Close"
@@ -76,6 +82,8 @@ var text = {
 		'emotion': \"Happy\",
 		'scrool_speed' : 0.1,
 		'flip' : false,
+		'background' : 'Test1',
+		'voce_pitch' : 0.7,
 		'options': [
 		{'text':'go back to part 2','command':{'type': 'next', 'args': 'part2',}},
 		{'text':'test12','command':{'type': 'null', 'args': 'null',}},
@@ -90,6 +98,8 @@ var text = {
 		'emotion': \"Angry\",
 		'scrool_speed' : 0.01,
 		'flip' : true,
+		'background' : 'Test2',
+		'voce_pitch' : 1.5,
 		'options': [
 		{'text':'test23','command':{'type': 'null', 'args': 'null',}},
 		{'text':'go back to part 1','command':{'type': 'next', 'args': 'part1',}}
@@ -151,17 +161,49 @@ position = Vector2( 512, 380 )
 [node name="english" type="Node" parent="language"]
 script = SubResource( 5 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Character" type="Sprite" parent="."]
 position = Vector2( 100, 200 )
 z_index = -10
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="bt_sfx1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -6.0
 pitch_scale = 2.0
 
-[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+[node name="bt_sfx2" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -12.0
+
+[node name="Speaking" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="Voice1" type="AudioStreamPlayer" parent="Speaking"]
+stream = ExtResource( 6 )
+volume_db = -12.0
+
+[node name="Voice2" type="AudioStreamPlayer" parent="Speaking"]
+stream = ExtResource( 7 )
+volume_db = -12.0
+
+[node name="Voice3" type="AudioStreamPlayer" parent="Speaking"]
+stream = ExtResource( 8 )
+volume_db = -12.0
+
+[node name="Voice4" type="AudioStreamPlayer" parent="Speaking"]
+stream = ExtResource( 9 )
+volume_db = -12.0
+
+[node name="Voice5" type="AudioStreamPlayer" parent="Speaking"]
+stream = ExtResource( 10 )
+volume_db = -12.0
+
+[node name="Voice6" type="AudioStreamPlayer" parent="Speaking"]
+stream = ExtResource( 11 )
+volume_db = -12.0
+
+[node name="background" type="Sprite" parent="."]
+modulate = Color( 0.694118, 0.694118, 0.694118, 1 )
+z_index = -100
+centered = false
 
 [connection signal="timeout" from="Dialog/Timer" to="." method="_on_Timer_timeout"]

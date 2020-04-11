@@ -3,12 +3,11 @@ extends CanvasLayer
 onready var text = get_node('language/english').text 
 var part = 'part1'
 var opt_menu = false
+var rand = 1
 
 func _ready():
-	get_node("Sprite").texture = load('res://Characters/' + text[part].character + '/' + text[part].emotion + '.png')
-	get_node("Dialog/Timer").wait_time = text[part].scrool_speed
-	get_node("Dialog/Label").set_text(text[part].dialog)
 	gen_opts(part)
+	command_exec({'type' : 'next', 'args' : part})
 
 func _process(delta):
 	if get_node("Dialog/Label").visible_characters >= text[part].dialog.length():
@@ -16,13 +15,17 @@ func _process(delta):
 		opt_menu = true
 		if Input.is_action_just_pressed('ui_accept'):
 			get_node('Options').get_child(select)._on_Button_button_down()
-			get_node('AudioStreamPlayer2').play()
+			get_node('bt_sfx2').play()
 	else:
 		get_node('AnimationPlayer').play('Close')
 		opt_menu = false
 		if Input.is_action_just_pressed('ui_accept'):
 			get_node("Dialog/Label").visible_characters = text[part].dialog.length()
-			get_node('AudioStreamPlayer2').play()
+			get_node('bt_sfx2').play()
+		if not get_node('Speaking').get_child(rand).is_playing():
+			randomize()
+			rand = int(rand_range(1,6))
+			get_node('Speaking').get_child(rand)._set_playing(true)
 
 var select = 0
 var previous = 0
@@ -33,17 +36,16 @@ func _input(event):
 
 func chooser():
 	previous = select
-#	print(select)
 	if Input.is_action_just_pressed("ui_up"):
 		if opt_menu:
-			get_node('AudioStreamPlayer').play()
+			get_node('bt_sfx1').play()
 		if not select >= get_node('Options').get_child_count()-1:
 			select += speed
 		else:
 			select = 0
 	if Input.is_action_just_pressed("ui_down"):
 		if opt_menu:
-			get_node('AudioStreamPlayer').play()
+			get_node('bt_sfx1').play()
 		if not select <= 0:
 			select -= speed
 		else:
@@ -58,14 +60,14 @@ func chooser():
 
 func gen_opts(next):
 	part = next
-	get_node("Sprite").texture = load('res://Characters/' + text[part].character + '/' + text[part].emotion + '.png')
+	get_node("Character").texture = load('res://Characters/' + text[part].character + '/' + text[part].emotion + '.png')
+	get_node("background").texture = load('res://background/' + text[part].background + '.png')
 	if text[part].flip:
-		get_node("Sprite").set_flip_h(false)
-		get_node("Sprite").set_position(Vector2(200,350))
-		print('flip')
+		get_node("Character").set_flip_h(false)
+		get_node("Character").set_position(Vector2(200,350))
 	else:
-		get_node("Sprite").set_flip_h(true)
-		get_node("Sprite").set_position(Vector2(840,350))
+		get_node("Character").set_flip_h(true)
+		get_node("Character").set_position(Vector2(840,350))
 	for i in range(0, get_node("Options").get_child_count()):
 		get_node("Options").get_child(i).queue_free()
 	for i in range(0, text[part].options.size()):
@@ -81,7 +83,6 @@ func _on_opt_opt_button(data):
 	for i in range(0, text[check].options.size()):
 		if text[check].options[i].text == data:
 			command_exec(text[check].options[i].command)
-			print(text[check].options[i].command)
 	pass # Replace with function body.
 
 func _on_Timer_timeout():
@@ -91,6 +92,9 @@ func _on_Timer_timeout():
 func command_exec(args):
 	if args.type == 'next':
 		get_node("Dialog/Label").visible_characters = 0
+		
 		get_node("Dialog/Timer").wait_time = text[args.args].scrool_speed
+		for i in range(0,6):
+			get_node('Speaking').get_child(i).pitch_scale = text[args.args].voce_pitch
 		get_node("Dialog/Label").set_text(text[args.args].dialog)
 		gen_opts(args.args)
