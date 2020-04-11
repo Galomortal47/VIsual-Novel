@@ -19,7 +19,7 @@ func _process(delta):
 	else:
 		get_node('AnimationPlayer').play('Close')
 		opt_menu = false
-		if Input.is_action_just_pressed('ui_accept'):
+		if Input.is_action_just_pressed('ui_accept') or Input.is_action_just_released('ui_mouse_right'):
 			get_node("Dialog/Label").visible_characters = text[part].dialog.length()
 			get_node('bt_sfx2').play()
 		if not get_node('Speaking').get_child(rand).is_playing():
@@ -54,7 +54,7 @@ func chooser():
 	for i in range(0, get_node('Options').get_child_count()):
 		if i == select:
 			get_node('Options').get_child(i).get_node('AnimationPlayer').set_current_animation('Close')
-		elif i == previous:
+		else:
 			get_node('Options').get_child(i).get_node('AnimationPlayer').set_current_animation('Open')
 
 
@@ -75,6 +75,7 @@ func gen_opts(next):
 		duplicate.get_node('text').set_text(text[part].options[i].text)
 		duplicate.set_position(Vector2(0,(-(i)*50)))
 		duplicate.connect("opt_button", self, "_on_opt_opt_button")
+		duplicate.id = i
 		get_node("Options").add_child(duplicate)
 #	pass
 

@@ -70,10 +70,11 @@ valign = 1
 script = ExtResource( 2 )
 
 [node name="Button" type="Button" parent="."]
-margin_left = -198.468
+margin_left = -192.0
 margin_top = 0.333
-margin_right = 937.532
+margin_right = 944.0
 margin_bottom = 119.333
+rect_scale = Vector2( 0.333, 0.333 )
 flat = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -91,10 +92,12 @@ text = "This is opt 1"
 align = 1
 
 [node name="vida2" type="Sprite" parent="."]
-modulate = Color( 0, 0, 0, 0 )
+modulate = Color( 0, 0, 0, 0.392157 )
 show_behind_parent = true
+position = Vector2( -192, 0 )
 scale = Vector2( 6, 0.666 )
 texture = ExtResource( 3 )
 centered = false
 
 [connection signal="button_down" from="Button" to="." method="_on_Button_button_down"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_Button_mouse_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Dialog_System.gd" type="Script" id=1]
 [ext_resource path="res://Dialog_System.tres" type="DynamicFont" id=2]
@@ -42,34 +42,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=3]
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=4]
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="GDScript" id=5]
@@ -136,17 +108,14 @@ text = "test
 test"
 scroll_following = true
 
-[node name="vida" type="Sprite" parent="Dialog"]
+[node name="vida" type="Sprite" parent="Dialog/Label"]
 modulate = Color( 0, 0, 0, 0.392157 )
-position = Vector2( 0, -80 )
-scale = Vector2( 14, 2 )
+show_behind_parent = true
+position = Vector2( -30.03, -27.027 )
+scale = Vector2( 42.042, 6.00601 )
 z_index = -5
 texture = ExtResource( 3 )
 centered = false
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Dialog"]
-anims/Appear = SubResource( 3 )
-anims/Dissapear = SubResource( 4 )
 
 [node name="Timer" type="Timer" parent="Dialog"]
 wait_time = 0.02
@@ -167,7 +136,7 @@ z_index = -10
 
 [node name="bt_sfx1" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = -6.0
+volume_db = -12.0
 pitch_scale = 2.0
 
 [node name="bt_sfx2" type="AudioStreamPlayer" parent="."]
@@ -175,7 +144,6 @@ stream = ExtResource( 5 )
 volume_db = -12.0
 
 [node name="Speaking" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Voice1" type="AudioStreamPlayer" parent="Speaking"]
 stream = ExtResource( 6 )
