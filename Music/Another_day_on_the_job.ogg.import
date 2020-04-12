@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Another_day_on_the_job.ogg-299135fc7e2fef8fd2e5f258e2f43655.oggstr"
+
+[deps]
+
+source_file="res://Music/Another_day_on_the_job.ogg"
+dest_files=[ "res://.import/Another_day_on_the_job.ogg-299135fc7e2fef8fd2e5f258e2f43655.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

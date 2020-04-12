@@ -6,6 +6,10 @@ var opt_menu = false
 var rand = 1
 
 func _ready():
+	var audio = AudioStreamPlayer.new()
+	audio.name = 'audio'
+	audio.autoplay = true
+	add_child(audio)
 	gen_opts(part)
 	command_exec({'type' : 'next', 'args' : part})
 
@@ -14,8 +18,11 @@ func _process(delta):
 		get_node('AnimationPlayer').play('Open')
 		opt_menu = true
 		if Input.is_action_just_pressed('ui_accept'):
-			get_node('Options').get_child(select)._on_Button_button_down()
-			get_node('bt_sfx2').play()
+			if select < get_node('Options').get_child_count():
+				var x = select
+				print(select, get_node('Options').get_child_count())
+				get_node('Options').get_child(x)._on_Button_button_down()
+				get_node('bt_sfx2').play()
 	else:
 		get_node('AnimationPlayer').play('Close')
 		opt_menu = false
@@ -101,6 +108,10 @@ func command_exec(args):
 		for i in range(0,6):
 			get_node('Speaking').get_child(i).pitch_scale = text[args.args].voce_pitch
 		get_node("Dialog/Label").set_text(text[args.args].dialog)
+		if not get_node('audio').get_stream() == load('res://Music/' + text[args.args].song + '.ogg'):
+			get_node('audio').set_stream(load('res://Music/' + text[args.args].song + '.ogg'))
+		if not get_node('audio').is_playing():
+			get_node('audio').play()
 		gen_opts(args.args)
 
 func _on_skip_button_down():
