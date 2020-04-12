@@ -74,7 +74,7 @@ func gen_opts(next):
 	for i in range(0, get_node("Options").get_child_count()):
 		get_node("Options").get_child(i).queue_free()
 	for i in range(0, text[part].options.size()):
-		var duplicate = load('res://Opt1.tscn').instance()
+		var duplicate = load('res://' + text[part].options[i].type + '.tscn').instance()
 		duplicate.get_node('text').set_text(text[part].options[i].text)
 		duplicate.set_position(Vector2(0,(-(i)*50)))
 		duplicate.connect("opt_button", self, "_on_opt_opt_button")

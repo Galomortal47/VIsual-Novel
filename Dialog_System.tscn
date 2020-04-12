@@ -59,11 +59,11 @@ var text = {
 		'background' : 'Test1',
 		'voce_pitch' : 0.7,
 		'options': [
-		{'text':'go back to part 2','command':{'type': 'next', 'args': 'part2',}},
-		{'text':'test12','command':{'type': 'null', 'args': 'null',}},
-		{'text':'test13','command':{'type': 'null', 'args': 'null',}},
-		{'text':'test14','command':{'type': 'null', 'args': 'null',}},
-		{'text':'test15','command':{'type': 'null', 'args': 'null',}}
+		{'text':'go back to part 2','command':{'type': 'next', 'args': 'part2',},'type' : 'Opt1'},
+		{'text':'test12','command':{'type': 'null', 'args': 'null',},'type' : 'Opt1'},
+		{'text':'test13','command':{'type': 'null', 'args': 'null',},'type' : 'Opt1'},
+		{'text':'test14','command':{'type': 'null', 'args': 'null',},'type' : 'Opt1'},
+		{'text':'test15','command':{'type': 'null', 'args': 'null',},'type' : 'Opt1'}
 		]
 	},
 	'part2':{
@@ -75,8 +75,8 @@ var text = {
 		'background' : 'Test2',
 		'voce_pitch' : 1.5,
 		'options': [
-		{'text':'test23','command':{'type': 'null', 'args': 'null',}},
-		{'text':'go back to part 1','command':{'type': 'next', 'args': 'part1',}}
+		{'text':'test23','command':{'type': 'null', 'args': 'null',},'type' : 'Opt1'},
+		{'text':'go back to part 1','command':{'type': 'next', 'args': 'part1',},'type' : 'Opt1'}
 		]
 	}
 }"
@@ -141,7 +141,6 @@ modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 512, 380 )
 
 [node name="language" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="english" type="Node" parent="language"]
 script = SubResource( 3 )
