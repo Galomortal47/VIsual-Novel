@@ -1,0 +1,117 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Dialog_System.tres" type="DynamicFont" id=1]
+[ext_resource path="res://optbutton.gd" type="Script" id=2]
+[ext_resource path="res://Graphic/graphics.gd" type="Script" id=3]
+[ext_resource path="res://vida.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Close"
+length = 99.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("vida2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -192, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("vida2:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0.392157 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Open"
+length = 99.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("vida2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0.392157 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("vida2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -192, 0 ), Vector2( 0, 0 ) ]
+}
+
+[node name="Opt1" type="Label"]
+margin_right = 1035.0
+margin_bottom = 117.0
+focus_mode = 2
+custom_fonts/font = ExtResource( 1 )
+align = 1
+valign = 1
+script = ExtResource( 2 )
+
+[node name="Button" type="Button" parent="."]
+margin_left = -217.202
+margin_top = 0.333
+margin_right = 918.798
+margin_bottom = 119.333
+rect_scale = Vector2( 0.333, 0.333 )
+focus_mode = 0
+enabled_focus_mode = 0
+flat = true
+script = ExtResource( 3 )
+
+[node name="graphics2" type="Label" parent="Button"]
+margin_left = 735.385
+margin_top = -0.977432
+margin_right = 775.385
+margin_bottom = 110.023
+custom_fonts/font = ExtResource( 1 )
+text = "high"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Close = SubResource( 1 )
+anims/Open = SubResource( 2 )
+
+[node name="text" type="Label" parent="."]
+margin_left = -217.202
+margin_right = 934.798
+margin_bottom = 117.0
+rect_scale = Vector2( 0.333, 0.333 )
+focus_mode = 2
+custom_fonts/font = ExtResource( 1 )
+text = "This is opt 1"
+align = 1
+
+[node name="vida2" type="Sprite" parent="."]
+modulate = Color( 0, 0, 0, 0.392157 )
+show_behind_parent = true
+position = Vector2( -192, 0 )
+scale = Vector2( 6, 0.666 )
+texture = ExtResource( 4 )
+centered = false
+
+[connection signal="button_down" from="Button" to="." method="_on_Button_button_down"]
+[connection signal="button_down" from="Button" to="Button" method="_on_Button_button_down"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_Button_mouse_entered"]

@@ -15,3 +15,6 @@ func _on_Button_mouse_entered():
 	get_parent().get_parent().select = id
 	pass # Replace with function body.
 
+func check_id():
+	if get_parent().get_parent().select == id:
+		return true

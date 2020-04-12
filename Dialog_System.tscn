@@ -60,8 +60,8 @@ var text = {
 		'voce_pitch' : 0.7,
 		'options': [
 		{'text':'go back to part 2','command':{'type': 'next', 'args': 'part2',},'type' : 'Opt1'},
-		{'text':'test12','command':{'type': 'null', 'args': 'null',},'type' : 'Opt1'},
-		{'text':'test13','command':{'type': 'null', 'args': 'null',},'type' : 'Opt1'},
+		{'text':'Volume','command':{'type': 'null', 'args': 'null',},'type' : 'Sound/OptSound'},
+		{'text':'Graphic:','command':{'type': 'null', 'args': 'null',},'type' : 'Graphic/OptGraphic'},
 		{'text':'test14','command':{'type': 'null', 'args': 'null',},'type' : 'Opt1'},
 		{'text':'test15','command':{'type': 'null', 'args': 'null',},'type' : 'Opt1'}
 		]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Sound/Volume.gd" type="Script" id=1]
+
+[node name="Volume" type="HSlider"]
+pause_mode = 2
+margin_left = 389.0
+margin_top = 307.0
+margin_right = 603.0
+margin_bottom = 332.0
+value = 80.0
+ticks_on_borders = true
+script = ExtResource( 1 )
+
+[connection signal="value_changed" from="." to="." method="_on_Volume_value_changed"]
