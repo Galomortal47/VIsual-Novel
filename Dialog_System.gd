@@ -107,7 +107,7 @@ func command_exec(args):
 		get_node("Dialog/Timer").wait_time = text[args.args].scrool_speed
 		for i in range(0,6):
 			get_node('Speaking').get_child(i).pitch_scale = text[args.args].voce_pitch
-		get_node("Dialog/Label").set_text(text[args.args].dialog)
+		get_node("Dialog/Label").set_bbcode(text[args.args].dialog)
 		if not get_node('audio').get_stream() == load('res://Music/' + text[args.args].song + '.ogg'):
 			get_node('audio').set_stream(load('res://Music/' + text[args.args].song + '.ogg'))
 		if not get_node('audio').is_playing():

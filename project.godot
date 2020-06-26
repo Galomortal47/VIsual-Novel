@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Light Novel"
+config/name="Visual Novel"
 config/icon="res://icon.png"
 
 [debug]

@@ -51,7 +51,7 @@ script/source = "extends Node
 
 var text = {
 	'part1':{
-		'dialog' : \"Jonny: this is test dialog, part 1\",
+		'dialog' : \"Jonny: this is test dialog, part 1 [color=blue]blue[/color]\",
 		'character' : \"Jonny\",
 		'emotion': \"Happy\",
 		'scrool_speed' : 0.1,
@@ -94,7 +94,6 @@ anims/Close = SubResource( 1 )
 anims/Open = SubResource( 2 )
 
 [node name="Dialog" type="Control" parent="."]
-editor/display_folded = true
 margin_left = 70.0
 margin_top = 510.0
 margin_right = 110.0
@@ -107,13 +106,8 @@ margin_right = 2630.0
 margin_bottom = 260.0
 rect_scale = Vector2( 0.333, 0.333 )
 custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
 visible_characters = 0
-text = "test
-.
-.
-.
-.
-test"
 scroll_following = true
 
 [node name="vida" type="Sprite" parent="Dialog/Label"]
